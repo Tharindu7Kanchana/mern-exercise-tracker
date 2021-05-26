@@ -10,14 +10,13 @@ const Exercise = (props) => {
     <td> {props.exercise.date.substring(0, 10)} </td>
     <td>
       <Link to={"edit/" + props.exercise._id}>edit</Link> |{" "}
-      <a
-        href="#"
+      <button
         onClick={() => {
           props.deleteExercise(props.exercise.id);
         }}
       >
-        delete
-      </a>
+        Delete
+      </button>
     </td>
   </tr>;
 };
@@ -30,7 +29,7 @@ export default class ExercisesList extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/exercises")
+      .get("https://mern-exercise-tracker.tharindukanchan.repl.co/exercises")
       .then((res) => {
         this.setState({ exercises: res.data });
       })
@@ -41,7 +40,9 @@ export default class ExercisesList extends Component {
 
   deleteExercise(id) {
     axios
-      .delete("http://localhost:5000/exercises/" + id)
+      .delete(
+        "https://mern-exercise-tracker.tharindukanchan.repl.co/exercises/" + id
+      )
       .then((res) => console.log(res.data));
     this.setState({
       exercises: this.state.exercises.filter((el) => el._id !== id),
